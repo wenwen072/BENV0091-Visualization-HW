@@ -47,8 +47,12 @@ ggplot(data = london_consumption, aes(x = pop_per_hec, y = kWh_per_cap, size = p
 anim_save("london-electricity -consumption-mark.gif")
 
 
+ggplot(data = london_consumption, aes(x = pop_per_hec, y = electricity_Gwh, size = pop, color = location)) +
+  scale_size("population", limits = range(london_consumption$pop)) + xlim(10, 150) + ylim(20, 700) +
+  geom_point(alpha = 0.5) + theme_bw() + transition_time(year) +
+  labs(title = 'Year: {frame_time}', x = 'Population density (per hectare)', y = 'Domestic electricity consumption (GWh)') + 
+  shadow_mark(alpha = 0.3, size = 0.5) + ease_aes('linear')
 
-
-
+anim_save("london-electricity-consumption-area.gif")
 
 
